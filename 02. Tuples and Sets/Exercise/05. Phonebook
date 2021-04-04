@@ -1,14 +1,19 @@
-def get_phonebook_info():
-    phonebook = {}
+phonebook = {}
 
-    entry = input()
-    while not entry.isdigit():
-        name, number = entry.split("-")
-        phonebook[name] = number
+while True:
+    command = input()
+    if command.isdigit():
+        break
+    name, number = command.split('-')
+    if name not in phonebook:
+        phonebook[name] = None
+    phonebook[name] = number
 
-        entry = input()
+n = int(command)
 
-    n = int(entry)
-
-    return phonebook, n
-
+for _ in range(n):
+    searched_name = input()
+    if searched_name in phonebook:
+        print(f'{searched_name} -> {phonebook[searched_name]}')
+    else:
+        print(f'Contact {searched_name} does not exist.')
