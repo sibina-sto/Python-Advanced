@@ -1,78 +1,49 @@
-import time
 import config
+from copy import deepcopy
+import food
 
-current_speed = config.INITIAL_SPEED
-current_time = time.time()
-current_direction = config.DIRECTIONS["RIGHT"]
-snake_pos = [[0, 0],
-             [1, 0],
-             [2, 0]]
+snake_pos = [[0, 0], [config.SCALE, 0], [config.SCALE*2, 0]]
 
+# Set all snake images to None
 
-def draw_snake():
-    fill(255)
-
-    for x, y in snake_pos:
-        rect(x * config.SCALE,
-             y * config.SCALE,
-             config.SCALE,
-             config.SCALE)
-
-
-def move():
-    global current_time
-
-    if time.time() - current_time < current_speed:
-        return
-
-    current_time = time.time()
-
-    head = snake_pos[-1]
-
-    for i in range(len(snake_pos) - 1):
-        snake_pos[i][0] = snake_pos[i+1][0]
-        snake_pos[i][1] = snake_pos[i+1][1]
-
-    inc_x, inc_y = config.DIRECTIONS_TRANSFORM[current_direction]
-    head[0] += inc_x
-    head[1] += inc_y
-
-    if head[0] < 0:
-        head[0] = config.GRID_SIZE
-    if head[0] > config.GRID_SIZE:
-        head[0] = 0
-    if head[1] < 0:
-        head[1] = config.GRID_SIZE
-    if head[1] > config.GRID_SIZE:
-        head[1] = 0
-
-
-def change_direction(direction):
-    global current_direction
-    current_direction = direction
-
-
-def can_eat_food(food_pos):
-    head = snake_pos[-1]
-    return head == food_pos
-
-
-def grow():
-    global snake_pos, current_speed
-    new_x = snake_pos[0][0]
-    new_y = snake_pos[0][1]
-    snake_pos = [[new_x, new_y]] + snake_pos
+def show():
+    # Draw the snake images
+    for segment in snake_pos:
+        fill(255)
+        rect(segment[0], segment[1], config.SCALE, config.SCALE)
     
-    if current_speed - config.SPEED_INC > 0:
-        current_speed -= config.SPEED_INC
-
-
-def is_dead():
+def check_edges():
     head = snake_pos[-1]
-    body = snake_pos[:-1]
+    if head[1] < 0:
+        head[1] = config.WINDOW_HEIGHT
+    elif head[1] >= config.WINDOW_HEIGHT:
+        head[1] = 0
+    elif head[0] < 0:
+        head[0] = config.WINDOW_WIDTH
+    elif head[0] >= config.WINDOW_WIDTH:
+        head[0] = 0
+        
+    
+def move():
+    current_changes = config.DIRECTIONS[config.CURRENT_DIR]
+    
+    snake_copy = deepcopy(snake_pos)
+    snake_pos[-1][0] += current_changes[0]
+    snake_pos[-1][1] += current_changes[1]
+    
+    for i in range(len(snake_pos) - 2, -1, -1):
+        snake_pos[i] = snake_copy[i + 1]
+        
+    check_edges()
+    
 
-    for body_part in body:
-        if head == body_part:
-            return True
+def touches_food():
+    return snake_pos[-1] == food.food_pos
 
-    return False
+
+def eat_food():
+    snake_pos.insert(0, snake_pos[0])
+    
+def eats_self():
+    head = snake_pos[-1]
+    return any(seg == head for seg in snake_pos[:-1])

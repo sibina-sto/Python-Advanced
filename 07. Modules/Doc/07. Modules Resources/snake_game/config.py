@@ -1,22 +1,17 @@
-FPS = 60
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 800
 
-DISPLAY_SIZE = 600
+SCALE = 20
 
-SCALE = 40
-
-GRID_SIZE = DISPLAY_SIZE // SCALE
-
-DIRECTIONS = {"UP": 0,
-              "DOWN": 1,
-              "LEFT": 2,
-              "RIGHT": 3}
-
-DIRECTIONS_TRANSFORM = {DIRECTIONS["UP"]: [0, -1],
-                        DIRECTIONS["DOWN"]: [0, 1],
-                        DIRECTIONS["LEFT"]: [-1, 0],
-                        DIRECTIONS["RIGHT"]: [1, 0]}
-
+CURRENT_DIR = "right"
 HIGHSCORE_FILE_PATH = "highscore.txt"
+GAME_OVER_MESSAGE = "GAME OVER!"
+HIGH_SCORE_MESSAGE = "New High Score!"
 
-INITIAL_SPEED = .5
-SPEED_INC = .1
+
+DIRECTIONS = {
+    "up": (0, -SCALE),
+    "right": (SCALE, 0),
+    "down": (0, SCALE),
+    "left": (-SCALE, 0)
+}

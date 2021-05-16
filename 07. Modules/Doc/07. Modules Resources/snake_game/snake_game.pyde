@@ -2,47 +2,52 @@ import config
 import snake
 import food
 import score
+import os
 
+
+def end_screen():
+    background(150)
+    fill(255)
+    textSize(64)
+    text(config.GAME_OVER_MESSAGE, config.WINDOW_WIDTH / 2 - len(config.GAME_OVER_MESSAGE) * 15, config.WINDOW_HEIGHT / 2)
+    if score.score > score.highscore:
+        text(config.HIGH_SCORE_MESSAGE, config.WINDOW_WIDTH / 2 - len(config.HIGH_SCORE_MESSAGE) * 15, config.WINDOW_HEIGHT / 2 + 64)
 
 def setup():
-    frameRate(config.FPS)
-    size(config.DISPLAY_SIZE,
-         config.DISPLAY_SIZE)
-    score.load_highscore()
+    size(config.WINDOW_WIDTH, config.WINDOW_HEIGHT)
+    frameRate(10)
+    
+    if os.path.exists(config.HIGHSCORE_FILE_PATH):
+        with open(config.HIGHSCORE_FILE_PATH, "r") as file:
+            score.highscore = int(file.read())
 
-
+    food.food_img = loadImage("images/apple.png")
+	# load snake images here
+    
 def draw():
     background(0)
-
-    # Draw stuff
-    snake.draw_snake()
-    food.draw_food()
-    score.draw_score()
-
-    # Update game world
+    snake.show()
     snake.move()
-
-    if snake.can_eat_food(food.food_pos):
-        snake.grow()
-        food.respawn()
-        score.increase()
-
-    if snake.is_dead():
-        print("Game over!")
+    food.show()
+    score.show()
+    
+    if snake.touches_food():
+        snake.eat_food()
+        food.reset()
+        score.score += 1
+        
+    if snake.eats_self():
+        end_screen()
         score.update_highscore()
         noLoop()
 
 
 def keyPressed():
-    direction = snake.current_direction
-
-    if keyCode == UP and snake.current_direction != config.DIRECTIONS["DOWN"]:
-        direction = config.DIRECTIONS["UP"]
-    elif keyCode == DOWN and snake.current_direction != config.DIRECTIONS["UP"]:
-        direction = config.DIRECTIONS["DOWN"]
-    elif keyCode == LEFT and snake.current_direction != config.DIRECTIONS["RIGHT"]:
-        direction = config.DIRECTIONS["LEFT"]
-    elif keyCode == RIGHT and snake.current_direction != config.DIRECTIONS["LEFT"]:
-        direction = config.DIRECTIONS["RIGHT"]
-
-    snake.change_direction(direction)
+    if keyCode == UP and config.CURRENT_DIR != "down":
+        config.CURRENT_DIR = "up"
+    elif keyCode == DOWN and config.CURRENT_DIR != "up":
+        config.CURRENT_DIR = "down"
+    elif keyCode == LEFT and config.CURRENT_DIR != "right":
+        config.CURRENT_DIR = "left"
+    elif keyCode == RIGHT and config.CURRENT_DIR != "left":
+        config.CURRENT_DIR = "right"
