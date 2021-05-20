@@ -1,16 +1,11 @@
-def get_subexpressions(expression):
-    opening_brackets = []
-    subexpressions = []
-
-    for index, char in enumerate(expression):
-        if char == "(":
-            opening_brackets.append(index)
-        elif char == ")":
-            last_opening_bracket_index = opening_brackets.pop()
-            subexpressions.append(expression[last_opening_bracket_index:index + 1])
-
-    return "\n".join(subexpressions)
-
+# Ines
 
 expression = input()
-print(get_subexpressions(expression))
+stack = []
+
+for index in range(len(expression)):
+    if expression[index] == "(":
+        stack.append(index)
+    elif expression[index] == ")":
+        start_index = stack.pop()
+        print(expression[start_index: index+1])
