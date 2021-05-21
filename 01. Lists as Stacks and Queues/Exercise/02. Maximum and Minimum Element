@@ -2,21 +2,16 @@ n = int(input())
 numbers = []
 
 for _ in range(n):
-    tokens = input().split()
-    query = tokens[0]
-
-    if query == "1":
-        num = int(tokens[1])
-        numbers.append(num)
-
-    elif query == "2" and numbers:
+    nums = input().split()
+    num = nums[0]
+    if num == "1":
+        num = nums[1]
+        numbers.append(int(num))
+    elif num == "2" and len(numbers) > 0:
         numbers.pop()
-
-    elif query == "3" and numbers:
+    elif num == "3" and len(numbers) > 0:
         print(max(numbers))
-
-    elif query == "4" and numbers:
+    elif num == "4" and len(numbers) > 0:
         print(min(numbers))
-
-
-print(', '.join(map(str, reversed(numbers))))
+        
+print(", ".join(reversed(list(map(str, numbers)))))
