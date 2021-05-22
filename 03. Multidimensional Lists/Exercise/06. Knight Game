@@ -1,43 +1,55 @@
-def validate_position(curr_position, board_size):
-    row, col = curr_position
-    return 0 <= row < board_size and 0 <= col < board_size
+# Valentin
+
+row = int(input())
+matrix = []
+[matrix.append(list(input()))for _ in range(row)]
+col = row
+current_damage = 0
+position = []
+removed = 0
+def total_damage(matrix,row,col):
+    count = 0
+    if row - 2 >= 0 and col - 1 >= 0:
+        if matrix[row-2][col-1] == "K":
+            count += 1
+    if row - 2 >= 0 and col + 1 < len(matrix):
+        if matrix[row-2][col+1] == "K":
+            count += 1
+    if row + 2 < len(matrix) and col + 1 < len(matrix):
+        if matrix[row+2][col+1] == "K":
+            count += 1
+    if row + 2 < len(matrix) and col - 1 >= 0:
+        if matrix[row+2][col-1] == "K":
+            count += 1
+    if col - 2 >= 0 and row + 1 < len(matrix):
+        if matrix[row+1][col-2] == "K":
+            count += 1
+    if col - 2 >= 0 and row - 1 >= 0:
+        if matrix[row-1][col-2] == "K":
+            count += 1
+    if col + 2 < len(matrix) and row + 1 < len(matrix):
+        if matrix[row+1][col+2] == "K":
+            count += 1
+    if col + 2 < len(matrix) and row - 1 >= 0:
+        if matrix[row-1][col+2] == "K":
+            count += 1
+    return count
 
 
-def calculate_knight_damage(board, row, col, board_size):
-    damage = 0
-    rows = [-2, -1, 1, 2, 2, 1, -1, -2]
-    cols = [1, 2, 2, 1, -1, -2, -2, -1]
-
-    for i in range(len(rows)):
-        curr_position = [row + rows[i], col + cols[i]]
-        if validate_position(curr_position, board_size) and board[curr_position[0]][curr_position[1]] == "K":
-            damage += 1
-
-    return damage
-
-
-board_size = int(input())
-board = [list(input()) for _ in range(board_size)]
-killed_knights_count = 0
 
 while True:
-    knight_most_damage = 0
-    knight_to_remove_position = (0, 0)
-
-    for row in range(board_size):
-        for col in range(board_size):
-            if board[row][col] == "K":
-                knight_damage = calculate_knight_damage(board, row, col, board_size)
-                if knight_damage > knight_most_damage:
-                    knight_most_damage = knight_damage
-                    knight_to_remove_position = (row, col)
-
-    if knight_most_damage == 0:
+    for row_index in range(row):
+        for col_index in range(col):
+            if matrix[row_index][col_index] == "K":
+                calculated_damage = total_damage(matrix,row_index,col_index)
+                if calculated_damage > current_damage:
+                    current_damage = calculated_damage
+                    position = [row_index,col_index]
+    if current_damage == 0:
         break
-
-    row_to_remove, col_to_remove = knight_to_remove_position
-    board[row_to_remove][col_to_remove] = "0"
-    killed_knights_count += 1
-
-
-print(killed_knights_count)
+    else:
+        matrix[position[0]][position[1]] = "0"
+        current_damage = 0
+        removed += 1
+        position = []
+print(removed)
