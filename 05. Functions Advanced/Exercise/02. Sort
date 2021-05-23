@@ -1,1 +1,6 @@
 print(sorted([int(n) for n in input().split()]))
+
+# 
+numbers = [int(el) for el in input().split()]
+
+print(sorted(numbers))
