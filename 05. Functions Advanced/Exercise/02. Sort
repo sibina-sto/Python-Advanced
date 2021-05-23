@@ -1,8 +1,1 @@
 print(sorted([int(n) for n in input().split()]))
-
-# 
-print(
-    sorted(
-        list(map(int, input().split()))
-    )
-)
