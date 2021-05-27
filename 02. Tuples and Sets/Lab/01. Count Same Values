@@ -1,11 +1,12 @@
 # Ines
 
-numbers = list(map(float, input().split()))
-set_numbers = []
+values = map(float, input().split(' '))
 
-for number in numbers:
-    if number not in set_numbers:
-        set_numbers.append(number)
-        
-for n in set_numbers:
-    print(f"{n} - {numbers.count(n)} times")
+values_counts = {}
+for value in values:
+    if value not in values_counts:
+        values_counts[value] = 0
+    values_counts[value] += 1
+
+for (value, count) in values_counts.items():
+    print(f'{value} - {count} times')
