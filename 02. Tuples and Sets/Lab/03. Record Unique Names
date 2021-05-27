@@ -1,3 +1,6 @@
+print(*set([input() for _ in range(int(input()))]), sep="\n")
+
+
 # n = int(input())
 # list_name = []
 # for i in range(n):
