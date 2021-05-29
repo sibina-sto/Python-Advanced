@@ -1,7 +1,12 @@
-data = input().split(" ")
-sets = dict.fromkeys(data)
-for key in sets:
-    print(f"{float(key):.1f} - {data.count(key)} times")
+# Ines
+
+def calculate_avg(iter):
+    return sum(iter) / len(iter)
+
+a = [1, 2, 3]
+b = [100, 200, 300]
+avg = calculate_avg(b)
+print(avg)
     
 ####
 n = int(input())
