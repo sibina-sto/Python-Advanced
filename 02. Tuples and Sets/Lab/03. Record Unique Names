@@ -1,18 +1,35 @@
+#### Ines
+
+n = int(input())
+names = set()
+
+for _ in range(n):
+    names.add(input())
+
+[print(name) for name in names]
+
+####
+
 print(*set([input() for _ in range(int(input()))]), sep="\n")
 
+####
 
-# n = int(input())
-# list_name = []
-# for i in range(n):
-#     name = input()
-#     if name not in list_name:
-#         list_name.append(name)
-# for i in list_name:
-#     print(i)
+n = int(input())
+list_name = []
+for i in range(n):
+   name = input()
+     if name not in list_name:
+       list_name.append(name)
+for i in list_name:
+     print(i)
+
+#####
 
 n = int(input())
 unique_names = []
+
 for i in range(n):
     unique_names.append(input())
+    
 for person in set(unique_names):
     print(person)
