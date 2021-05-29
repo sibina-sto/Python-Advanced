@@ -1,9 +1,34 @@
+#### Ines
+
+n = int(input())
+all_guests = set()
+
+
+for _ in range(n):
+    all_guests.add(input())
+
+ticket = input()
+
+arrived = set()
+while not ticket == "END":
+    arrived.add(ticket)
+    ticket = input()
+
+print(len(all_guests.difference(arrived)))
+print(all_guests.difference(arrived))
+
+####
+
 guests = set(input()for _ in range(int(input())))
+
 all_guest = set()
 line = input()
+
 while not line == "END":
     all_guest.add(line)
     line = input()
+    
 undefined = guests - all_guest
+
 print(len(undefined))
 print(*sorted(undefined), sep="\n")
