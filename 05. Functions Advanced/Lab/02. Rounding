@@ -1,2 +1,13 @@
+# Ines 
+
+print([round(float(el)) for el in input().split()])
+
+# Ines 2
+
+nums = [float(el) for el in input().split()]
+rounded = map(round, nums)
+print(list(rounded))
+
+# 
 numbers = list(map(float, input().split()))
 print(list(map(round, numbers)))
