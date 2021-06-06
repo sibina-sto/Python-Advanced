@@ -1,2 +1,17 @@
+# Ines
+
+print([abs(float(el)) for el in input().split()])
+
+# Ines 2
+
+def make_absolute(seq):
+    return list(map(abs, seq))
+
+
+nums = [float(el) for el in input().split()]
+
+print(make_absolute(nums))
+
+#
 numbers = list(map(float, input().split()))
 print(list(map(abs, numbers)))
