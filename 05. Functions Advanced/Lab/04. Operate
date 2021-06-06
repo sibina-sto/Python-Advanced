@@ -15,6 +15,15 @@ def operate(operator, *args):
 
 print(operate("+", 1, 2, 3))
 
+# Ines 2
+
+from functools import reduce
+
+def operate(operator, *args):
+    return reduce(lambda x, y: eval(f"{x} {operator} {y}"), args)
+
+print(operate("+", 1, 2, 3))
+
 ######
 def operate(operator, *args):
     first_num = args[0]
