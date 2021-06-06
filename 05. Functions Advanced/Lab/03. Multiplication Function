@@ -1,9 +1,16 @@
+# Ines 
+
 def multiply(*args):
     result = 1
-    for num in args:
-        result *= num
+    for el in args:
+        result *= el
     return result
 
+# Second option
+# from functools import reduce
+#
+# def multiply(*args):
+#     return reduce(lambda x, y: x*y, args)
 
 print(multiply(1, 4, 5))
 print(multiply(4, 5, 6, 1, 3))
