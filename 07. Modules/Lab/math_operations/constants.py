@@ -1,4 +1,4 @@
-from advanced_modules.math_operations.operattion_helper import *
+from advanced_modules.math_operations.operation_helper import *
 
 
 operation_mapper = {
