@@ -1,4 +1,4 @@
-from advanced_modules.triangle.core import print_triangle
+from modules.triangle.core import print_triangle
 
 
 n = int(input())
