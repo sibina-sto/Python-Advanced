@@ -1,4 +1,4 @@
-from advanced_modules.fib.helper import generate_sequence, find_number
+from modules.fib.helper import generate_sequence, find_number
 
 
 command = input()
