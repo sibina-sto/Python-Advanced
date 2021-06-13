@@ -1,4 +1,4 @@
-from advanced_modules.math_operations.constants import operation_mapper
+from modules.math_operations.constants import operation_mapper
 
 num_1, operator, num_2 = input().split()
 
