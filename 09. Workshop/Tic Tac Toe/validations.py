@@ -8,5 +8,5 @@ def is_position_valid(position, board):
     if not is_in_board:
         return False
 
-    row, col = decode_position(position, board_size)
-    return board[row][col] is None
+    (row, column) = decode_position(position, board_size)
+    return board[row][column] is None
