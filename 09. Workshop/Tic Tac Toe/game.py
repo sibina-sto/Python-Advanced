@@ -4,8 +4,8 @@ from tic_tac_toe.utils import all_single_value
 
 
 def place_mark(board, player):
-    row, col = get_position(player, board)
-    board[row][col] = player.mark
+    (row, column) = get_position(player, board)
+    board[row][column] = player.mark
 
 
 def check_game_over(board, player):
@@ -14,7 +14,7 @@ def check_game_over(board, player):
     columns = [[board[i][j] for i in range(board_size)] for j in range(board_size)]
     diagonals = [
         [board[i][i] for i in range(board_size)],
-        [board[i][board_size - 1 - i] for i in range(board_size)]
+        [board[i][board_size - i - 1] for i in range(board_size)]
     ]
 
     row_checks = [all_single_value(row, player.mark) for row in rows]
@@ -31,22 +31,22 @@ def check_game_over(board, player):
 
 def print_game_over(board, player):
     print_board(board)
-    print(f"{player.name} won!")
+    print(f'{player.name} won!')
 
 
 def game_loop(board, players):
-    curr_player, next_player = players
+    current_player, next_player = players
 
     while True:
         print_board(board)
-        place_mark(board, curr_player)
-        if check_game_over(board, curr_player):
-            print_game_over(board, curr_player)
+        place_mark(board, current_player)
+        if check_game_over(board, current_player):
+            print_game_over(board, current_player)
             break
-        curr_player, next_player = next_player, curr_player
+        current_player, next_player = next_player, current_player
 
 
 def start_game(board_size):
-    board, *players = setup_game(board_size)
+    (board, *players) = setup_game(board_size)
     print_welcome(players[0])
     game_loop(board, players)
