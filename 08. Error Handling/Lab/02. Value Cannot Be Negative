@@ -1,11 +1,6 @@
-class ValueCannotBeNegativeError(Exception):
-    def __init__(self, value):
-        self.value = value
-        message = f"Value {value} is negative"
-        super(ValueCannotBeNegativeError, self).__init__(message)
-
+from error_handling.errors import ValueCannotBeNegative
 
 for _ in range(5):
-    number = int(input())
+    number = float(input())
     if number < 0:
-        raise ValueCannotBeNegativeError(number)
+        raise ValueCannotBeNegative
