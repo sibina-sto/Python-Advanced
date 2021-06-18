@@ -1,15 +1,13 @@
-def read_input():
-    text = input()
-    times = int(input())
-    return text, times
+text = input()
 
-
-def solve():
-    try:
-        text, times = read_input()
-    except ValueError:
-        return "Variable times must be an integer"
-    return text * times
-
-
-print(solve())
+number = input()
+try:
+    number = int(number)
+except ValueError:
+    print("Variable times must be an integer")
+except SyntaxError:
+    print("Some syntax error")
+else:
+    print(text * number)
+finally:
+    print("Printed no matter what")
