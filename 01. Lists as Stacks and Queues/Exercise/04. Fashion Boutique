@@ -1,16 +1,36 @@
+stack = input().split()
+capacity = int(input())
+value_sum = 0
+racks = 1
+
+while len(stack) > 0:
+    value_sum += int(stack[-1])
+    if value_sum <= capacity:
+        stack.pop()
+
+    else:
+        racks += 1
+        value_sum = 0
+
+print(racks)
+
+#
 box = []
+
 for clothing in input().split():
-    box.append(int(clothing))
+    box.append((int(clothing)))
 rack_capacity = int(input())
 
 total_racks = 1
-current_rack = 0
-
+current_rack_weight = 0
 for i in range(len(box)):
     current_clothing = box.pop()
-    if current_clothing + current_rack > rack_capacity:
+    if current_rack_weight + current_clothing > rack_capacity:
         total_racks += 1
-        current_rack = 0
-    current_rack += current_clothing
+        current_rack_weight = 0
+    else:
+        total_racks += 0
+    current_rack_weight += current_clothing
+
 
 print(total_racks)
