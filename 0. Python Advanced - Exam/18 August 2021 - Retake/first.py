@@ -31,10 +31,3 @@ if working_bees:
     print(f"Bees left: {', '.join([str(el) for el in working_bees])}")
 if nectar:
     print(f"Nectar left: {', '.join([str(el) for el in nectar])}")
-
-    © 2021 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
