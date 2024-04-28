@@ -55,8 +55,3 @@ while True:
 
 for el in matrix:
     print(" ".join(el))
-
-    © 2021 GitHub, Inc.
-    Terms
-    Privacy
-    Sec
